@@ -1,4 +1,4 @@
-# dev_fest
+# devfest
 
 A new Flutter project.
 
