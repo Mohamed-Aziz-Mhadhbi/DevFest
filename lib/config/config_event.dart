@@ -10,12 +10,14 @@ abstract class ConfigEvent extends Equatable {
 
 class LoadConfigEvent extends ConfigEvent {
   @override
-  Future<ConfigState> applyAsync({ConfigState? currentState, ConfigBloc? bloc}) {
-    // TODO: implement applyAsync
+  String toString() => 'LoadConfigEvent';
+
+  @override
+  Future<ConfigState> applyAsync(
+      {ConfigState? currentState, ConfigBloc? bloc}) {
     throw UnimplementedError();
   }
 
   @override
-  // TODO: implement props
   List<Object?> get props => throw UnimplementedError();
 }
