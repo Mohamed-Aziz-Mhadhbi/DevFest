@@ -4,7 +4,7 @@ import 'index.dart';
 
 @immutable
 abstract class ConfigEvent extends Equatable {
-  ConfigEvent([List props = const <dynamic>[]]);
+  const ConfigEvent([List props = const <dynamic>[]]);
   Future<ConfigState> applyAsync({ConfigState currentState, ConfigBloc bloc});
 }
 
@@ -14,8 +14,8 @@ class LoadConfigEvent extends ConfigEvent {
 
   @override
   Future<ConfigState> applyAsync(
-      {ConfigState? currentState, ConfigBloc? bloc}) {
-    throw UnimplementedError();
+      {ConfigState? currentState, ConfigBloc? bloc}) async {
+    return InConfigState();
   }
 
   @override
