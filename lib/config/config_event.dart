@@ -15,7 +15,13 @@ class LoadConfigEvent extends ConfigEvent {
   @override
   Future<ConfigState> applyAsync(
       {ConfigState? currentState, ConfigBloc? bloc}) async {
-    return InConfigState();
+    try {
+      await Future.delayed(const Duration(seconds: 2));
+      return InConfigState();
+    } catch (_, stacktrace) {
+      print('$_ $stacktrace');
+      return ErrorConfigState(_.toString());
+    }
   }
 
   @override
