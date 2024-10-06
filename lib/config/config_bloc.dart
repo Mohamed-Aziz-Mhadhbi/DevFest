@@ -2,7 +2,15 @@ import 'package:bloc/bloc.dart';
 import 'index.dart';
 
 class ConfigBloc extends Bloc<ConfigEvent, ConfigState> {
-  ConfigBloc(super.initialState);
+  static final ConfigBloc _configBlocSingleton = ConfigBloc._internal();
+
+  factory ConfigBloc() {
+    return _configBlocSingleton;
+  }
+
+  ConfigBloc._internal();
+
+  bool darkMode = false;
 
   @override
   ConfigState get inialState => UnConfigState();

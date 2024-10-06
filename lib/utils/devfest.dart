@@ -12,4 +12,5 @@ class Devfest {
   static bool isDebugMode = false;
 
   static SharedPreferences? prefs;
+  static const String darkModePref = "darkModePref";
 }
