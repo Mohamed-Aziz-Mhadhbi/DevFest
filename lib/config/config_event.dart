@@ -1,19 +1,16 @@
-import 'package:devfest/utils/devfest.dart';
-import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
+import 'dart:async';
+import '../utils/devfest.dart';
 import 'index.dart';
+import 'package:meta/meta.dart';
 
 @immutable
-abstract class ConfigEvent extends Equatable {
-  const ConfigEvent([List props = const <dynamic>[]]);
+abstract class ConfigEvent {
   Future<ConfigState> applyAsync({ConfigState currentState, ConfigBloc bloc});
 }
 
 class DarkModeEvent extends ConfigEvent {
   final bool darkOn;
-
   DarkModeEvent(this.darkOn);
-
   @override
   String toString() => 'DarkModeEvent';
 
@@ -21,17 +18,14 @@ class DarkModeEvent extends ConfigEvent {
   Future<ConfigState> applyAsync(
       {ConfigState? currentState, ConfigBloc? bloc}) async {
     try {
-      bloc?.darkMode = darkOn;
+      bloc?.darkModeOn = darkOn;
       Devfest.prefs?.setBool(Devfest.darkModePref, darkOn);
       return InConfigState();
-    } catch (_, stacktrace) {
-      print('$_ $stacktrace');
-      return ErrorConfigState(_.toString());
+    } catch (_, stackTrace) {
+      print('$_ $stackTrace');
+      return new ErrorConfigState(_.toString());
     }
   }
-
-  @override
-  List<Object?> get props => throw UnimplementedError();
 }
 
 class LoadConfigEvent extends ConfigEvent {
@@ -42,14 +36,12 @@ class LoadConfigEvent extends ConfigEvent {
   Future<ConfigState> applyAsync(
       {ConfigState? currentState, ConfigBloc? bloc}) async {
     try {
-      await Future.delayed(const Duration(seconds: 2));
-      return InConfigState();
-    } catch (_, stacktrace) {
-      print('$_ $stacktrace');
-      return ErrorConfigState(_.toString());
+      await Future.delayed(new Duration(seconds: 2));
+
+      return new InConfigState();
+    } catch (_, stackTrace) {
+      print('$_ $stackTrace');
+      return new ErrorConfigState(_.toString());
     }
   }
-
-  @override
-  List<Object?> get props => throw UnimplementedError();
 }

@@ -13,4 +13,12 @@ class Devfest {
 
   static SharedPreferences? prefs;
   static const String darkModePref = "darkModePref";
+
+  static checkDebug() {
+    assert(() {
+      var baseUrl = "https://storage.googleapis.com/gdg-devfest";
+      isDebugMode = true;
+      return true;
+    }());
+  }
 }
